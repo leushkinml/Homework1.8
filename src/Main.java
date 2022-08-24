@@ -1,21 +1,19 @@
+import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) {
 
         // Task1
-        int year = 2020;
-        String leapYear = leapYearVerification(year);
-        System.out.println(year + leapYear);
+        int year = 2022;
+        leapYearVerification(year);
 
         // Task2
-        int clientOS = 1;
+        int clientOS = 1;  // 1 - iOS, 2 - Android
         int deviceYear = 2022;
-        int currentYear = 2022;
-        String deviceOS = chekOS(deviceYear, clientOS, currentYear);
-        System.out.println(deviceOS);
+        chekOS(deviceYear, clientOS);
 
         // Task3
-
         int deliveryDistance = 95;
         int deliveryDays = chekDeliveryDays(deliveryDistance);
         System.out.println("Потребуется дней: " + deliveryDays);
@@ -24,39 +22,31 @@ public class Main {
 
 
     // Task1
-    public static String leapYearVerification(int year) {
-        String leapYear = "";
-
-        if ((year % 400) == 0) {
-            leapYear = " - високосный год.";
-        } else if ((year % 4) == 0 && (year % 100) != 0) {
-            leapYear = " - високосный год.";
+    private static void leapYearVerification(int year) {
+        if ((year % 4) == 0 && (year % 100) != 0 || (year % 400) == 0 ) {
+            System.out.println(year + " - високосный год.");
         } else {
-            leapYear = " - не високосный год.";
+            System.out.println(year + " - не високосный год.");
         }
-        return leapYear;
     }
 
     // Task2
-    public static String chekOS(int deviceYear, int clientOS, int currentYear) {
-        String deviceOS = "";
-
+    private static void chekOS(int deviceYear, int clientOS) {
+        int currentYear = LocalDate.now().getYear();
         if (clientOS == 0 && deviceYear < currentYear) {
-            deviceOS = "Установите облегчённую (Lite) версию приложения для iOS по ссылке.";
+            System.out.println("Установите облегчённую (Lite) версию приложения для iOS по ссылке.");
         } else if (clientOS == 0 && deviceYear == currentYear) {
-            deviceOS = "Установите полную (Full) версию приложения для iOS по ссылке.";
+            System.out.println("Установите полную (Full) версию приложения для iOS по ссылке.");
         } else if (clientOS == 1 && deviceYear < currentYear) {
-            deviceOS = "Установите облегчённую (Lite) версию приложения для Android по ссылке.";
+            System.out.println("Установите облегчённую (Lite) версию приложения для Android по ссылке.");
         } else if (clientOS == 1 && deviceYear == currentYear) {
-            deviceOS = "Установите полную (Full) версию приложения для Android по ссылке.";
+            System.out.println("Установите полную (Full) версию приложения для Android по ссылке.");
         }
-        return deviceOS;
     }
 
     // Task3
-    public static int chekDeliveryDays(int deliveryDistance) {
+    private static int chekDeliveryDays(int deliveryDistance) {
         int deliveryDays = 0;
-
         if (deliveryDistance <= 20 && deliveryDistance > 0) {
             deliveryDays = 1;
         } else if (deliveryDistance > 20 && ((deliveryDistance - 20) % 40) == 0) {
@@ -66,7 +56,6 @@ public class Main {
         }
         return deliveryDays;
     }
-
 }
 
     /*
